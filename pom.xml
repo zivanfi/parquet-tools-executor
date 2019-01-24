@@ -1,0 +1,42 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>parquet-tools-executor</groupId>
+  <artifactId>parquet-tools-executor</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>parquet-tools-executor</name>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.parquet</groupId>
+      <artifactId>parquet-tools</artifactId>
+      <version>${parquet-tools.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.hadoop</groupId>
+      <artifactId>hadoop-client</artifactId>
+      <version>${hadoop.version}</version>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.4.0</version>
+        <configuration>
+          <executable>java</executable>
+          <commandlineArgs>-classpath %classpath org.apache.parquet.tools.Main ${parquet-tools.params}</commandlineArgs>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <properties>
+    <hadoop.version>2.7.3</hadoop.version>
+    <parquet-tools.params></parquet-tools.params>
+    <parquet-tools.version>1.10.0</parquet-tools.version>
+  </properties>
+</project>
